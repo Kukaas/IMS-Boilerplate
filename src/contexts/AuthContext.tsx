@@ -16,6 +16,8 @@ interface AuthContextType {
   isAuthenticated: boolean;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function useAuth() {
@@ -36,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const idToken = await result.user.getIdToken();
       
       // Send the token to your backend to set up the session cookie
-      const response = await fetch('http://localhost:3000/api/auth/session', {
+      const response = await fetch(`${API_URL}/api/auth/session`, {
         method: 'POST',
         credentials: 'include', // Important for cookies
         headers: {
@@ -60,7 +62,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await signOut(auth);
       // Clear session cookie through backend
-      await fetch('http://localhost:3000/api/auth/logout', {
+      await fetch(`${API_URL}/api/auth/logout`, {
         method: 'POST',
         credentials: 'include',
       });
@@ -75,7 +77,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Verify session status with backend
     async function checkSession() {
       try {
-        const response = await fetch('http://localhost:3000/api/auth/verify-session', {
+        const response = await fetch(`${API_URL}/api/auth/verify-session`, {
           credentials: 'include',
         });
         
