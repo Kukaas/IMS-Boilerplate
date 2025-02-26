@@ -20,7 +20,7 @@ export function Sidebar({ className }: SidebarProps) {
       <div className="space-y-4 py-4">
         {/* Title - Only visible on mobile */}
         <div className="md:hidden px-3 py-2">
-          <h2 className="text-lg font-semibold tracking-tight">Google OAuth</h2>
+          <h2 className="text-lg font-semibold tracking-tight">IMS</h2>
         </div>
 
         <div className="px-3 py-2">

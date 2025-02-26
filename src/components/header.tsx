@@ -85,14 +85,14 @@ export function Header() {
                     <Sidebar />
                   </SheetContent>
                 </Sheet>
-
+                s
                 <Link to="/" className="font-semibold hidden md:block">
-                  Google OAuth
+                  IMS
                 </Link>
               </>
             ) : (
               <Link to="/" className="font-semibold">
-                Google OAuth
+                IMS
               </Link>
             )}
           </div>
@@ -161,10 +161,10 @@ export function Header() {
           ) : (
             <div className="flex items-center gap-2">
               <Button variant="ghost" asChild>
-                <Link to="/signin">Sign in</Link>
+                <Link to="/signin">Login</Link>
               </Button>
               <Button asChild>
-                <Link to="/signup">Sign up</Link>
+                <Link to="/signup">Register</Link>
               </Button>
             </div>
           )}

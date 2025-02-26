@@ -10,11 +10,11 @@ export default function Welcome() {
       <main className="flex min-h-screen flex-col items-center justify-center p-4">
         <div className="container flex flex-col items-center gap-4 text-center">
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-            Google OAuth
+            IMS Boilerplate
           </h1>
           <p className="max-w-[600px] text-muted-foreground md:text-xl">
-            A minimalist platform designed to help you achieve your goals. 
-            Get started in seconds.
+            A minimalist platform designed to help you achieve your goals. Get
+            started in seconds.
           </p>
           <div className="flex gap-4">
             <Button asChild size="lg">
@@ -24,9 +24,7 @@ export default function Welcome() {
               </Link>
             </Button>
             <Button variant="outline" asChild size="lg">
-              <Link to="/signin">
-                Sign in
-              </Link>
+              <Link to="/signin">Sign in</Link>
             </Button>
           </div>
         </div>
