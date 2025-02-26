@@ -12,33 +12,36 @@ import { Toaster } from "sonner";
 import Calendar from "./Pages/Private/Calendar";
 import Documents from "./Pages/Private/Documents";
 import Setting from "./Pages/Private/Setting";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
   return (
     <Router>
-      <AuthProvider>
-        <Routes>
-          {/* Public routes - will redirect to dashboard if authenticated */}
-          <Route element={<PublicRoute />}>
-            <Route path="/" element={<Welcome />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-          </Route>
+      <ThemeProvider>
+        <AuthProvider>
+          <Routes>
+            {/* Public routes - will redirect to dashboard if authenticated */}
+            <Route element={<PublicRoute />}>
+              <Route path="/" element={<Welcome />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+            </Route>
 
-          {/* Private routes */}
-          <Route element={<PrivateRoute />}>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/calendar" element={<Calendar />} />
-            <Route path="/documents" element={<Documents />} />
-            <Route path="/settings" element={<Setting />} />
-          </Route>
+            {/* Private routes */}
+            <Route element={<PrivateRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/calendar" element={<Calendar />} />
+              <Route path="/documents" element={<Documents />} />
+              <Route path="/settings" element={<Setting />} />
+            </Route>
 
-          {/* New route for verify email */}
-          <Route path="/verify-email" element={<VerifyEmail />} />
-        </Routes>
-        <Toaster richColors closeButton position="top-center" />
-      </AuthProvider>
+            {/* New route for verify email */}
+            <Route path="/verify-email" element={<VerifyEmail />} />
+          </Routes>
+          <Toaster richColors closeButton position="top-center" />
+        </AuthProvider>
+      </ThemeProvider>
     </Router>
   );
 }

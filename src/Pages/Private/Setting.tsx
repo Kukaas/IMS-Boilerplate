@@ -8,9 +8,11 @@ import { Bell, Shield, User, Moon } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useMemo } from "react";
 import { toast } from "sonner";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Setting() {
   const { currentUser, updateUserProfile } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [displayName, setDisplayName] = useState(
     currentUser?.displayName || ""
   );
@@ -36,6 +38,10 @@ export default function Setting() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
@@ -133,7 +139,11 @@ export default function Setting() {
                     Toggle dark mode theme
                   </p>
                 </div>
-                <Switch />
+                <Switch
+                  checked={theme === "dark"}
+                  onCheckedChange={toggleTheme}
+                  aria-label="Toggle dark mode"
+                />
               </div>
             </CardContent>
           </Card>
