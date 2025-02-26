@@ -7,6 +7,7 @@ import SignIn from './Pages/Public/SignIn';
 import Welcome from './Pages/Public/Welcome';
 import SignUp from './Pages/Public/SignUp';
 import VerifyEmail from "./Pages/Public/VerifyEmail";
+import ForgotPassword from "./Pages/Public/ForgotPassword";
 import { Toaster } from "sonner";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Welcome />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
           </Route>
 
           {/* Private routes */}
