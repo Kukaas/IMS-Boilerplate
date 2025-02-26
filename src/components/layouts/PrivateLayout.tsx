@@ -10,10 +10,10 @@ export function PrivateLayout({ children }: PrivateLayoutProps) {
   return (
     <div className="min-h-screen">
       <Sheet>
-        <Header />
-        <div className="flex pt-14">
+        <Header className="fixed top-0 z-50 w-full" />
+        <div className="flex pt-14 h-[calc(100vh-3.5rem)]">
           {/* Desktop Sidebar */}
-          <div className="hidden md:block">
+          <div className="hidden md:block sticky top-14 h-[calc(100vh-3.5rem)]">
             <Sidebar />
           </div>
 
@@ -23,9 +23,7 @@ export function PrivateLayout({ children }: PrivateLayoutProps) {
           </SheetContent>
 
           {/* Main Content */}
-          <main className="flex-1 p-4 md:p-8">
-            {children}
-          </main>
+          <main className="flex-1 overflow-auto">{children}</main>
         </div>
       </Sheet>
     </div>
