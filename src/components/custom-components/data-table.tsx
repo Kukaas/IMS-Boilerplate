@@ -13,7 +13,7 @@ interface Column {
   label: string;
   align?: "left" | "right" | "center";
   render?: (value: any) => React.ReactNode;
-  gridTemplate?: (value: any) => React.ReactNode; // Optional custom grid template
+  gridTemplate?: (value: any) => React.ReactNode;
 }
 
 interface DataTableProps {
@@ -28,69 +28,75 @@ export function DataTable({
   viewMode = "auto",
 }: DataTableProps) {
   const TableView = () => (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          {columns.map((column) => (
-            <TableHead
-              key={column.key}
-              className={column.align ? `text-${column.align}` : ""}
-            >
-              {column.label}
-            </TableHead>
-          ))}
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((row, i) => (
-          <TableRow key={row.id || i}>
+    <div className="w-full overflow-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
             {columns.map((column) => (
-              <TableCell
+              <TableHead
                 key={column.key}
                 className={column.align ? `text-${column.align}` : ""}
               >
-                {column.render
-                  ? column.render(row[column.key])
-                  : row[column.key]}
-              </TableCell>
+                {column.label}
+              </TableHead>
             ))}
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {data.map((row, i) => (
+            <TableRow key={row.id || i}>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.key}
+                  className={column.align ? `text-${column.align}` : ""}
+                >
+                  {column.render
+                    ? column.render(row[column.key])
+                    : row[column.key]}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 
   const GridView = () => (
     <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {data.map((row, i) => (
-        <Card key={row.id || i} className="hover:shadow-md transition-shadow">
-          <CardContent className="p-6 space-y-4">
-            {/* Header Info */}
-            <div className="space-y-1.5">
-              {columns[0]?.gridTemplate ? (
-                columns[0].gridTemplate(row[columns[0].key])
-              ) : (
-                <div className="flex flex-col">
-                  <span className="text-lg font-semibold">
+        <Card key={row.id || i}>
+          <CardContent className="p-4 space-y-2">
+            {/* Main Info (First Column) */}
+            {columns[0] && (
+              <div className="space-y-1">
+                {columns[0].gridTemplate ? (
+                  columns[0].gridTemplate(row[columns[0].key])
+                ) : columns[0].render ? (
+                  columns[0].render(row[columns[0].key])
+                ) : (
+                  <div className="text-lg font-semibold">
                     {row[columns[0].key]}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Secondary Info (Other Columns) */}
+            <div className="grid gap-2 pt-2 border-t text-sm">
+              {columns.slice(1).map((column) => (
+                <div
+                  key={column.key}
+                  className="flex items-center justify-between"
+                >
+                  <span className="text-muted-foreground">{column.label}</span>
+                  <span className={column.align ? `text-${column.align}` : ""}>
+                    {column.render
+                      ? column.render(row[column.key])
+                      : row[column.key]}
                   </span>
                 </div>
-              )}
-            </div>
-
-            {/* Status and Amount */}
-            <div className="flex items-center justify-between">
-              <div>
-                {columns
-                  .find((col) => col.key === "status")
-                  ?.render?.(row["status"])}
-              </div>
-              <div className="text-lg font-medium">{row["amount"]}</div>
-            </div>
-
-            {/* Date */}
-            <div className="pt-2 border-t text-sm text-muted-foreground">
-              {columns.find((col) => col.key === "date")?.render?.(row["date"])}
+              ))}
             </div>
           </CardContent>
         </Card>
@@ -98,6 +104,7 @@ export function DataTable({
     </div>
   );
 
+  // Responsive view handling
   if (viewMode === "grid") {
     return <GridView />;
   }
