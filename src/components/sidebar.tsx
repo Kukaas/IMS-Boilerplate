@@ -1,26 +1,46 @@
 import { Link } from "react-router-dom";
 import { sidebarLinks } from "@/config/sidebar";
+import { cn } from "@/lib/utils";
+import { useLocation } from "react-router-dom";
 
-export function Sidebar() {
+interface SidebarProps {
+  className?: string;
+}
+
+export function Sidebar({ className }: SidebarProps) {
+  const location = useLocation();
+
   return (
-    <div className="sticky top-14 h-[calc(100vh-3.5rem)] w-64 border-r bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div className={cn("h-[calc(100vh-3.5rem)] w-60 border-r bg-background", className)}>
       <div className="space-y-4 py-4">
+        {/* Title - Only visible on mobile */}
+        <div className="md:hidden px-3 py-2">
+          <h2 className="text-lg font-semibold tracking-tight">Google OAuth</h2>
+        </div>
+
         <div className="px-3 py-2">
-          <div className="space-y-1">
+          <nav className="space-y-1">
             {sidebarLinks.map((link) => {
               const Icon = link.icon;
+              const isActive = location.pathname === link.href;
+              
               return (
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="flex items-center rounded-lg px-3 py-2 text-gray-900 transition-all hover:bg-gray-100 dark:text-gray-100 dark:hover:bg-gray-800"
+                  className={cn(
+                    "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                    isActive 
+                      ? "bg-secondary text-secondary-foreground" 
+                      : "text-muted-foreground hover:bg-secondary hover:text-secondary-foreground"
+                  )}
                 >
-                  <Icon className="mr-2 h-4 w-4" />
+                  <Icon className="h-4 w-4" />
                   {link.title}
                 </Link>
               );
             })}
-          </div>
+          </nav>
         </div>
       </div>
     </div>

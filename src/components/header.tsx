@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Bell,
   User,
+  Menu,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -13,6 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
+import { SheetTrigger } from "@/components/ui/sheet";
 
 export function Header() {
   const { isAuthenticated, currentUser, logout } = useAuth();
@@ -26,13 +28,24 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="h-full px-4 flex items-center justify-between">
-        <Link to="/" className="font-semibold">
-          Google OAuth
-        </Link>
+    <header className="fixed top-0 left-0 right-0 h-14 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
+      <div className="flex h-14 items-center px-4">
+        <div className="flex items-center gap-4">
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          
+          <Link to="/" className="font-semibold hidden md:block">
+            Google OAuth
+          </Link>
+        </div>
+        
+        <div className="flex-1" />
+        
         {isAuthenticated ? (
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-2">
             <Button variant="ghost" size="icon">
               <Bell className="h-5 w-5" />
             </Button>
@@ -61,7 +74,7 @@ export function Header() {
             </DropdownMenu>
           </div>
         ) : (
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center gap-2">
             <Button variant="ghost" asChild>
               <Link to="/signin">Sign in</Link>
             </Button>
