@@ -13,11 +13,6 @@ export const sidebarLinks = [
     href: "/dashboard",
   },
   {
-    title: "Profile",
-    icon: UserCircle,
-    href: "/profile",
-  },
-  {
     title: "Documents",
     icon: FileText,
     href: "/documents",

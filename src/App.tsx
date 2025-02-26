@@ -9,6 +9,9 @@ import SignUp from './Pages/Public/SignUp';
 import VerifyEmail from "./Pages/Public/VerifyEmail";
 import ForgotPassword from "./Pages/Public/ForgotPassword";
 import { Toaster } from "sonner";
+import Calendar from "./Pages/Private/Calendar";
+import Documents from "./Pages/Private/Documents";
+import Setting from "./Pages/Private/Setting";
 
 function App() {
   return (
@@ -26,6 +29,9 @@ function App() {
           {/* Private routes */}
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/documents" element={<Documents />} />
+            <Route path="/settings" element={<Setting />} />
           </Route>
 
           {/* New route for verify email */}
