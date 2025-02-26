@@ -2,8 +2,25 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { Header } from "@/components/header";
+import { Navigate, useNavigate } from "react-router-dom";
+
 export default function SignUp() {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // Redirect if already authenticated
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  const handleSignUp = async () => {
+    try {
+      await signInWithGoogle();
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Sign up failed:', error);
+    }
+  };
 
   return (
     <>
@@ -22,7 +39,7 @@ export default function SignUp() {
           <Button
             variant="outline"
             className="w-full hover:bg-slate-100 dark:hover:bg-slate-800"
-            onClick={signInWithGoogle}
+            onClick={handleSignUp}
           >
             <svg
               className="mr-2 h-4 w-4"
