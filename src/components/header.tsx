@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Bell, User, Menu, LogOut, Settings, ChevronRight } from "lucide-react";
+import {
+  Bell,
+  User,
+  Menu,
+  LogOut,
+  Settings,
+  ChevronRight,
+  Copy,
+} from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -19,16 +27,14 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
-import { sidebarLinks } from "@/config/sidebar";
-import { cn } from "@/lib/utils";
 import { useLocation } from "react-router-dom";
 import { Sidebar } from "@/components/sidebar";
+import { toast } from "sonner";
 
 export function Header() {
   const { isAuthenticated, currentUser, logout } = useAuth();
   const [showProfileDialog, setShowProfileDialog] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -39,6 +45,26 @@ export function Header() {
       console.error("Logout failed:", error);
     } finally {
       setIsLoggingOut(false);
+    }
+  };
+
+  const handleShareProfile = async () => {
+    if (!currentUser?.uid) {
+      toast.error("User profile not found");
+      return;
+    }
+
+    const profileUrl = `${window.location.origin}/profile/${currentUser.uid}`;
+
+    try {
+      await navigator.clipboard.writeText(profileUrl);
+      toast.success("Profile link copied!", {
+        description: "The profile link has been copied to your clipboard.",
+      });
+    } catch (error) {
+      toast.error("Failed to copy", {
+        description: "Could not copy the profile link to clipboard.",
+      });
     }
   };
 
@@ -169,7 +195,10 @@ export function Header() {
               <Button className="flex-1" variant="outline">
                 Edit Profile
               </Button>
-              <Button className="flex-1">Share Profile</Button>
+              <Button className="flex-1" onClick={handleShareProfile}>
+                <Copy className="mr-2 h-4 w-4" />
+                Share Profile
+              </Button>
             </div>
           </div>
         </DialogContent>

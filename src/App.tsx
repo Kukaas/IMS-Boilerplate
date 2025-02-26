@@ -6,6 +6,7 @@ import Dashboard from './Pages/Private/Dashboard';
 import SignIn from './Pages/Public/SignIn';
 import Welcome from './Pages/Public/Welcome';
 import SignUp from './Pages/Public/SignUp';
+import { Toaster } from "sonner";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
+        <Toaster richColors closeButton position="top-center" />
       </AuthProvider>
     </Router>
   );
