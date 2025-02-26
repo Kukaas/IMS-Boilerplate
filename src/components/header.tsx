@@ -85,7 +85,6 @@ export function Header() {
                     <Sidebar />
                   </SheetContent>
                 </Sheet>
-                s
                 <Link to="/" className="font-semibold hidden md:block">
                   IMS
                 </Link>

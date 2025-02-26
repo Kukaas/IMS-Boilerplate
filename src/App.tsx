@@ -6,6 +6,7 @@ import Dashboard from './Pages/Private/Dashboard';
 import SignIn from './Pages/Public/SignIn';
 import Welcome from './Pages/Public/Welcome';
 import SignUp from './Pages/Public/SignUp';
+import VerifyEmail from "./Pages/Public/VerifyEmail";
 import { Toaster } from "sonner";
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
+
+          {/* New route for verify email */}
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </Routes>
         <Toaster richColors closeButton position="top-center" />
       </AuthProvider>
