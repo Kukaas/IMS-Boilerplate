@@ -23,20 +23,20 @@ import { DataTable } from "@/components/custom-components/data-table";
 
 // Sample data for charts
 const salesData = [
-  { month: "Jan", sales: 4000, orders: 240, revenue: 8400 },
-  { month: "Feb", sales: 3000, orders: 198, revenue: 6700 },
-  { month: "Mar", sales: 5000, orders: 280, revenue: 9800 },
-  { month: "Apr", sales: 2780, orders: 190, revenue: 5400 },
-  { month: "May", sales: 4890, orders: 290, revenue: 9200 },
-  { month: "Jun", sales: 3390, orders: 210, revenue: 7100 },
+  { month: "Jan", sales: 4000, orders: 240, revenue: 420000 },
+  { month: "Feb", sales: 3000, orders: 198, revenue: 335000 },
+  { month: "Mar", sales: 5000, orders: 280, revenue: 490000 },
+  { month: "Apr", sales: 2780, orders: 190, revenue: 270000 },
+  { month: "May", sales: 4890, orders: 290, revenue: 460000 },
+  { month: "Jun", sales: 3390, orders: 210, revenue: 355000 },
 ];
 
 const topProducts = [
-  { name: "Wireless Keyboard", sales: 145, revenue: 8700 },
-  { name: "Gaming Mouse", sales: 132, revenue: 10560 },
-  { name: "USB-C Cable", sales: 97, revenue: 1261 },
-  { name: "Monitor Stand", sales: 85, revenue: 4250 },
-  { name: "Laptop Sleeve", sales: 72, revenue: 2160 },
+  { name: "Mechanical Keyboard", sales: 145, revenue: 434999 },
+  { name: "Gaming Mouse", sales: 132, revenue: 197999 },
+  { name: "Type-C Cable", sales: 97, revenue: 29099 },
+  { name: "Monitor Stand", sales: 85, revenue: 127500 },
+  { name: "Laptop Sleeve", sales: 72, revenue: 43200 },
 ];
 
 const columns = [
@@ -130,7 +130,7 @@ export default function Reports() {
             <CardContent className="p-6">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">Total Sales</p>
-                <p className="text-2xl font-bold">$45,231.89</p>
+                <p className="text-2xl font-bold">₱2,261,594.50</p>
                 <p className="text-sm text-green-600">
                   +12.5% from last period
                 </p>
@@ -152,7 +152,7 @@ export default function Reports() {
                 <p className="text-sm text-muted-foreground">
                   Average Order Value
                 </p>
-                <p className="text-2xl font-bold">$36.33</p>
+                <p className="text-2xl font-bold">₱1,816.54</p>
                 <p className="text-sm text-red-600">-2.1% from last period</p>
               </div>
             </CardContent>
@@ -176,7 +176,7 @@ export default function Reports() {
                 showGridLines={false}
                 showYAxis={false}
                 showXAxis={false}
-                valueFormatter={(number) => `$${number.toLocaleString()}`}
+                valueFormatter={(number) => `₱${number.toLocaleString()}`}
                 curveType="natural"
                 allowDecimals={false}
                 customTooltip={({ payload, active }) => {
@@ -188,7 +188,7 @@ export default function Reports() {
                           {payload[0]?.payload.month}
                         </span>
                         <span className="font-medium tabular-nums">
-                          ${payload[0]?.value?.toLocaleString()}
+                          ₱{payload[0]?.value?.toLocaleString()}
                         </span>
                       </div>
                     </div>

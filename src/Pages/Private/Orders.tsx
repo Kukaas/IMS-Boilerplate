@@ -12,9 +12,9 @@ import {
   LayoutGrid,
   ChevronLeft,
   ChevronRight,
-  DollarSign,
   ShoppingCart,
   Eye,
+  PhilippinePeso,
 } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -158,7 +158,7 @@ const columns = [
     align: "right" as const,
     render: (value: number) => (
       <span className="font-medium">
-        ${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+        ₱{value.toLocaleString(undefined, { minimumFractionDigits: 2 })}
       </span>
     ),
   },
@@ -168,116 +168,116 @@ const sampleOrders: OrderDetails[] = [
   {
     id: "1",
     orderNumber: "ORD-2024-001",
-    customerName: "John Smith",
+    customerName: "Juan dela Cruz",
     items: 3,
     status: "Delivered",
     date: "2024-03-20",
-    total: 152.97,
+    total: 4799.97,
     products: [
       {
         id: "1",
-        name: "Wireless Keyboard",
+        name: "Mechanical Keyboard",
         sku: "KB-001",
         quantity: 1,
-        price: 59.99,
-        subtotal: 59.99,
+        price: 2999.99,
+        subtotal: 2999.99,
       },
       {
         id: "2",
         name: "Gaming Mouse",
         sku: "MS-002",
         quantity: 1,
-        price: 79.99,
-        subtotal: 79.99,
+        price: 1499.99,
+        subtotal: 1499.99,
       },
       {
         id: "3",
-        name: "USB-C Cable",
+        name: "Type-C Cable",
         sku: "CB-003",
         quantity: 1,
-        price: 12.99,
-        subtotal: 12.99,
+        price: 299.99,
+        subtotal: 299.99,
       },
     ],
     shippingAddress: {
-      street: "123 Main St",
-      city: "Springfield",
-      state: "IL",
-      zipCode: "62701",
-      country: "USA",
+      street: "123 Rizal Street",
+      city: "Makati City",
+      state: "Metro Manila",
+      zipCode: "1200",
+      country: "Philippines",
     },
-    paymentMethod: "Credit Card",
-    subtotal: 152.97,
-    shippingCost: 10.0,
-    tax: 12.24,
+    paymentMethod: "GCash",
+    subtotal: 4799.97,
+    shippingCost: 150.0,
+    tax: 575.99,
   },
   {
     id: "2",
     orderNumber: "ORD-2024-002",
-    customerName: "Emma Wilson",
+    customerName: "Maria Santos",
     items: 1,
     status: "Processing",
     date: "2024-03-21",
-    total: 79.99,
+    total: 2999.99,
     products: [
       {
         id: "4",
-        name: "Wireless Keyboard",
+        name: "Mechanical Keyboard",
         sku: "KB-001",
         quantity: 1,
-        price: 59.99,
-        subtotal: 59.99,
+        price: 2999.99,
+        subtotal: 2999.99,
       },
     ],
     shippingAddress: {
-      street: "456 Elm St",
-      city: "Springfield",
-      state: "IL",
-      zipCode: "62702",
-      country: "USA",
+      street: "456 Bonifacio Street",
+      city: "Quezon City",
+      state: "Metro Manila",
+      zipCode: "1100",
+      country: "Philippines",
     },
-    paymentMethod: "Credit Card",
-    subtotal: 79.99,
-    shippingCost: 5.0,
-    tax: 6.24,
+    paymentMethod: "Maya",
+    subtotal: 2999.99,
+    shippingCost: 100.0,
+    tax: 359.99,
   },
   {
     id: "3",
     orderNumber: "ORD-2024-003",
-    customerName: "Michael Brown",
+    customerName: "Miguel Bautista",
     items: 2,
     status: "Pending",
     date: "2024-03-21",
-    total: 25.98,
+    total: 599.98,
     products: [
       {
         id: "5",
-        name: "USB-C Cable",
+        name: "Type-C Cable",
         sku: "CB-003",
         quantity: 1,
-        price: 12.99,
-        subtotal: 12.99,
+        price: 299.99,
+        subtotal: 299.99,
       },
       {
         id: "6",
-        name: "USB-C to HDMI Adapter",
+        name: "Type-C to HDMI Adapter",
         sku: "CB-004",
         quantity: 1,
-        price: 12.99,
-        subtotal: 12.99,
+        price: 299.99,
+        subtotal: 299.99,
       },
     ],
     shippingAddress: {
-      street: "789 Oak St",
-      city: "Springfield",
-      state: "IL",
-      zipCode: "62703",
-      country: "USA",
+      street: "789 Aguinaldo Street",
+      city: "Pasig City",
+      state: "Metro Manila",
+      zipCode: "1600",
+      country: "Philippines",
     },
-    paymentMethod: "Credit Card",
-    subtotal: 25.98,
-    shippingCost: 3.0,
-    tax: 2.24,
+    paymentMethod: "GCash",
+    subtotal: 599.98,
+    shippingCost: 100.0,
+    tax: 71.99,
   },
 ];
 
@@ -386,13 +386,13 @@ export default function Orders() {
                 <div>
                   <p className="text-sm text-muted-foreground">Total Revenue</p>
                   <p className="text-2xl font-bold text-green-600">
-                    $
+                    ₱
                     {orders
                       .reduce((sum, order) => sum + order.total, 0)
                       .toLocaleString(undefined, { minimumFractionDigits: 2 })}
                   </p>
                 </div>
-                <DollarSign className="h-8 w-8 text-green-600" />
+                <PhilippinePeso className="h-8 w-8 text-green-600" />
               </div>
             </CardContent>
           </Card>

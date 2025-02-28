@@ -7,13 +7,12 @@ import {
   Plus,
   Package2,
   Calendar,
-  DollarSign,
   Table2,
   LayoutGrid,
   ChevronLeft,
   ChevronRight,
   Tags,
-  AlertCircle,
+  PhilippinePeso,
 } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -66,7 +65,7 @@ const columns = [
     align: "right" as const,
     render: (value: number) => (
       <span className="font-medium">
-        ${value.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+        ₱{value.toLocaleString(undefined, { minimumFractionDigits: 2 })}
       </span>
     ),
   },
@@ -121,12 +120,12 @@ const columns = [
 const sampleProducts: Product[] = [
   {
     id: "1",
-    name: "Wireless Keyboard",
+    name: "Mechanical Keyboard",
     sku: "KB-001",
     category: "Electronics",
     status: "Active",
     lastUpdated: "2024-03-20",
-    price: 59.99,
+    price: 2999.99,
   },
   {
     id: "2",
@@ -135,16 +134,16 @@ const sampleProducts: Product[] = [
     category: "Electronics",
     status: "Draft",
     lastUpdated: "2024-03-19",
-    price: 79.99,
+    price: 1499.99,
   },
   {
     id: "3",
-    name: "USB-C Cable",
+    name: "Type-C Cable",
     sku: "CB-003",
     category: "Accessories",
     status: "Archived",
     lastUpdated: "2024-03-18",
-    price: 12.99,
+    price: 299.99,
   },
 ];
 
@@ -222,13 +221,13 @@ export default function Products() {
                 <div>
                   <p className="text-sm text-muted-foreground">Total Value</p>
                   <p className="text-2xl font-bold text-blue-600">
-                    $
+                    ₱
                     {totalValue.toLocaleString(undefined, {
                       minimumFractionDigits: 2,
                     })}
                   </p>
                 </div>
-                <DollarSign className="h-8 w-8 text-blue-600" />
+                <PhilippinePeso className="h-8 w-8 text-blue-600" />
               </div>
             </CardContent>
           </Card>
