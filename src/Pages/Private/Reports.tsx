@@ -179,6 +179,21 @@ export default function Reports() {
                 valueFormatter={(number) => `$${number.toLocaleString()}`}
                 curveType="natural"
                 allowDecimals={false}
+                customTooltip={({ payload, active }) => {
+                  if (!active || !payload) return null;
+                  return (
+                    <div className="rounded-lg border bg-background p-2 shadow-sm">
+                      <div className="flex flex-col gap-1">
+                        <span className="text-sm font-medium text-muted-foreground">
+                          {payload[0]?.payload.month}
+                        </span>
+                        <span className="font-medium tabular-nums">
+                          ${payload[0]?.value?.toLocaleString()}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                }}
               />
             </CardContent>
           </Card>
