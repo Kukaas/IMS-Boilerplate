@@ -8,12 +8,12 @@ import {
 } from "@/components/ui/table";
 import { Card, CardContent } from "@/components/ui/card";
 
-interface Column {
+export interface Column {
   key: string;
   label: string;
+  render: (value: any, item?: any) => React.ReactNode;
+  gridTemplate?: (value: any, item?: any) => React.ReactNode;
   align?: "left" | "right" | "center";
-  render?: (value: any) => React.ReactNode;
-  gridTemplate?: (value: any) => React.ReactNode;
 }
 
 interface DataTableProps {
@@ -51,7 +51,7 @@ export function DataTable({
                   className={column.align ? `text-${column.align}` : ""}
                 >
                   {column.render
-                    ? column.render(row[column.key])
+                    ? column.render(row[column.key], row)
                     : row[column.key]}
                 </TableCell>
               ))}
@@ -71,9 +71,9 @@ export function DataTable({
             {columns[0] && (
               <div className="space-y-1">
                 {columns[0].gridTemplate ? (
-                  columns[0].gridTemplate(row[columns[0].key])
+                  columns[0].gridTemplate(row[columns[0].key], row)
                 ) : columns[0].render ? (
-                  columns[0].render(row[columns[0].key])
+                  columns[0].render(row[columns[0].key], row)
                 ) : (
                   <div className="text-lg font-semibold">
                     {row[columns[0].key]}
@@ -92,7 +92,7 @@ export function DataTable({
                   <span className="text-muted-foreground">{column.label}</span>
                   <span className={column.align ? `text-${column.align}` : ""}>
                     {column.render
-                      ? column.render(row[column.key])
+                      ? column.render(row[column.key], row)
                       : row[column.key]}
                   </span>
                 </div>
