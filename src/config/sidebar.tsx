@@ -4,6 +4,11 @@ import {
   UserCircle,
   FileText,
   Calendar,
+  Package,
+  Boxes,
+  Truck,
+  ClipboardList,
+  BarChart,
 } from "lucide-react";
 
 export const sidebarLinks = [
@@ -11,6 +16,31 @@ export const sidebarLinks = [
     title: "Overview",
     icon: LayoutDashboard,
     href: "/dashboard",
+  },
+  {
+    title: "Inventory",
+    icon: Boxes,
+    href: "/inventory",
+  },
+  {
+    title: "Products",
+    icon: Package,
+    href: "/products",
+  },
+  {
+    title: "Orders",
+    icon: ClipboardList,
+    href: "/orders",
+  },
+  {
+    title: "Suppliers",
+    icon: Truck,
+    href: "/suppliers",
+  },
+  {
+    title: "Reports",
+    icon: BarChart,
+    href: "/reports",
   },
   {
     title: "Documents",
