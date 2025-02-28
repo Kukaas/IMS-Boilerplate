@@ -49,6 +49,7 @@ export default function Dashboard() {
       key: "amount",
       label: "Amount",
       align: "right" as const,
+      render: (value: string) => value,
     },
   ];
 
@@ -199,40 +200,20 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <AreaChart
-                className="h-[300px] mt-4 text-foreground [&>svg]:text-foreground [&_.tremor-AreaChart-axisText]:!text-foreground [&_.tremor-AreaChart-axisLine]:!text-foreground [&_.tremor-AreaChart-tick]:!text-foreground [&_.tremor-AreaChart-label]:!text-foreground"
+                className="h-[300px] mt-4"
                 data={chartdata}
                 index="date"
                 categories={["Revenue", "Profit"]}
-                colors={["blue", "green"]}
-                yAxisWidth={60}
+                colors={["indigo", "cyan"]}
+                yAxisWidth={0}
                 showAnimation={true}
-                showLegend={true}
-                showGridLines={true}
+                showLegend={false}
+                showGridLines={false}
                 showYAxis={false}
                 showXAxis={false}
                 valueFormatter={(number) => `₱${number.toLocaleString()}`}
-                curveType="monotone"
-                legendProps={{
-                  className: "gap-5",
-                }}
-                customLegend={({ categories, colors }) => (
-                  <div className="flex items-center gap-8 px-3 py-2 rounded-md border">
-                    {categories.map((category, index) => (
-                      <div key={category} className="flex items-center gap-2">
-                        <div
-                          className="h-3 w-3 rounded-full"
-                          style={{
-                            backgroundColor:
-                              index === 0
-                                ? "hsl(var(--primary))"
-                                : "hsl(var(--success))",
-                          }}
-                        />
-                        <span className="text-sm font-medium">{category}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                curveType="natural"
+                allowDecimals={false}
                 customTooltip={({ payload, active }) => {
                   if (!active || !payload) return null;
                   return (
@@ -253,6 +234,19 @@ export default function Dashboard() {
                   );
                 }}
               />
+              <div className="flex items-center gap-8 px-3 py-2 mt-4 rounded-md border">
+                {["Revenue", "Profit"].map((category, index) => (
+                  <div key={category} className="flex items-center gap-2">
+                    <div
+                      className="h-3 w-3 rounded-full"
+                      style={{
+                        backgroundColor: index === 0 ? "#818cf8" : "#22d3ee",
+                      }}
+                    />
+                    <span className="text-sm font-medium">{category}</span>
+                  </div>
+                ))}
+              </div>
             </CardContent>
           </Card>
 
