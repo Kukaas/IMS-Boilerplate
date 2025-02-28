@@ -7,27 +7,9 @@ import {
   MoreHorizontal,
 } from "lucide-react";
 import { PrivateLayout } from "@/components/layouts/PrivateLayout";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/custom-components/data-table";
-
-const formatDate = (date: Date) => {
-  return date.toLocaleString("en-US", {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
-};
+import { AreaChart } from "@tremor/react";
 
 export default function Dashboard() {
   const columns = [
@@ -108,6 +90,39 @@ export default function Dashboard() {
     },
   ];
 
+  const chartdata = [
+    {
+      date: "Jan",
+      Revenue: 2890,
+      Profit: 2400,
+    },
+    {
+      date: "Feb",
+      Revenue: 1890,
+      Profit: 1398,
+    },
+    {
+      date: "Mar",
+      Revenue: 3890,
+      Profit: 2980,
+    },
+    {
+      date: "Apr",
+      Revenue: 2890,
+      Profit: 2198,
+    },
+    {
+      date: "May",
+      Revenue: 4890,
+      Profit: 3570,
+    },
+    {
+      date: "Jun",
+      Revenue: 3890,
+      Profit: 2800,
+    },
+  ];
+
   return (
     <PrivateLayout>
       <div className="flex flex-col gap-4 p-4 md:p-8">
@@ -183,9 +198,61 @@ export default function Dashboard() {
               <CardTitle>Overview</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="h-[300px] flex items-center justify-center border-2 border-dashed rounded-lg">
-                Chart Component Here
-              </div>
+              <AreaChart
+                className="h-[300px] mt-4 text-foreground [&>svg]:text-foreground [&_.tremor-AreaChart-axisText]:!text-foreground [&_.tremor-AreaChart-axisLine]:!text-foreground [&_.tremor-AreaChart-tick]:!text-foreground [&_.tremor-AreaChart-label]:!text-foreground"
+                data={chartdata}
+                index="date"
+                categories={["Revenue", "Profit"]}
+                colors={["blue", "green"]}
+                yAxisWidth={60}
+                showAnimation={true}
+                showLegend={true}
+                showGridLines={true}
+                showYAxis={false}
+                showXAxis={false}
+                valueFormatter={(number) => `₱${number.toLocaleString()}`}
+                curveType="monotone"
+                legendProps={{
+                  className: "gap-5",
+                }}
+                customLegend={({ categories, colors }) => (
+                  <div className="flex items-center gap-8 px-3 py-2 rounded-md border">
+                    {categories.map((category, index) => (
+                      <div key={category} className="flex items-center gap-2">
+                        <div
+                          className="h-3 w-3 rounded-full"
+                          style={{
+                            backgroundColor:
+                              index === 0
+                                ? "hsl(var(--primary))"
+                                : "hsl(var(--success))",
+                          }}
+                        />
+                        <span className="text-sm font-medium">{category}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                customTooltip={({ payload, active }) => {
+                  if (!active || !payload) return null;
+                  return (
+                    <div className="rounded-lg border bg-background p-2 shadow-sm">
+                      <div className="grid grid-cols-2 gap-2">
+                        {payload.map((category, idx) => (
+                          <div key={idx} className="flex flex-col">
+                            <span className="text-sm font-medium text-muted-foreground">
+                              {category.name}
+                            </span>
+                            <span className="font-medium tabular-nums">
+                              ₱{category.value?.toLocaleString()}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }}
+              />
             </CardContent>
           </Card>
 
