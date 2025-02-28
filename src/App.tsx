@@ -13,6 +13,11 @@ import Calendar from "./Pages/Private/Calendar";
 import Documents from "./Pages/Private/Documents";
 import Setting from "./Pages/Private/Setting";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import Products from "./Pages/Private/Products";
+import Inventory from "./Pages/Private/Inventory";
+import Orders from "./Pages/Private/Orders";
+import Suppliers from "./Pages/Private/Suppliers";
+import Reports from "./Pages/Private/Reports";
 
 function App() {
   return (
@@ -34,6 +39,11 @@ function App() {
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/documents" element={<Documents />} />
               <Route path="/settings" element={<Setting />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/inventory" element={<Inventory />} />
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/suppliers" element={<Suppliers />} />
+              <Route path="/reports" element={<Reports />} />
             </Route>
 
             {/* New route for verify email */}
